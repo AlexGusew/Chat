@@ -11,6 +11,7 @@
 #include <sys/epoll.h>
 #include <netdb.h>
 #include <errno.h>
+#include "writeToClient.h"
 
 #define MAXEVENTS 64
 
@@ -98,6 +99,9 @@ void accept_and_add_new()
       abort();
     }
     in_len = sizeof(in_addr);
+
+    char answer[] = "hello, guy!!!!!";
+    writeToClient(infd, answer);
   }
 
   if (errno != EAGAIN && errno != EWOULDBLOCK)
